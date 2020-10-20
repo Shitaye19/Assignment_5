@@ -90,7 +90,11 @@ kable(data_Fruit)
 **1.3 Import `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset3.txt` into R . Watch out for the first few lines, missing values, separators, quotation marks, and deliminaters.**
 
 ```{r}
-read.table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset3.txt", sep, ",")
+
+Fruit<-read.delim("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset3.txt")#, row.names = 1)#, sep = ",")
+
+kable(Fruit)
+
 ```
 
 
