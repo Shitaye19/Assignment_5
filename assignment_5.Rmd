@@ -57,6 +57,9 @@ Import data frames listed below into R and parse the columns appropraitly when n
 1.1 **Create the following tibble manually, first using `tribble()` and then using `tibble()`. Print both results.**
 
 ```{r}
+parse_character(c("a","b","c"))
+parse_integer(c("1","2.1","2","3.2"))
+parse_character(c("apple","orange"))
 tribble()
 ```
 
