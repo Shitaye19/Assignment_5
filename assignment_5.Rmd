@@ -1,0 +1,48 @@
+---
+title: "Assignment 5: Data import (readr) and tidy data (tidyr)"
+Author: Shitaye
+Date: 02/19/2020
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#**Instructions: Please read through this before you begin**
+
+*This homework is due by **10pm on Monday 10/26/20**
+
+*Please **reproduce this markdown template**. Pay attention to all the formating in this file, including bullet points, bolded characterrs, inserted code chunks, headings, text colors, blank lines, etc.
+
+*For the first two excercises in this assignment, **import** data files into R and **parse** them properly as instructed. **Tidy and/or **transform** the data frames when appropriate.
+
+  + We have not extensively covered parsing data in lecture, but you can find more information about here.
+  
+  + Briefly, you can choose to use the `col_types` argument in a`read_*()` function to parse the data during    import.
+  + In many cases, you can also choose to parse the data using one of the `parse_*()` functions nested within    a `mutate()` after importing the data.
+  
+  + In many cases, you can choose to parse the data using one of the `parse_*()` functions nested within a      `mutate()` function after importing the data.
+  
+* For the next exercise, you will explore a dataset with details about passengers on the Titanic. First, **answer the questions below and use figures or tables to support your answer** Then, **explore the dataset on your own** using the data transformation and visualization skills that you have learned in this so far. 
+
+    + For this excercise, pleas make sure to put some thought into **editing the aesthetics of your figures and tables** to make them easier to understand and nicer to look at (e.g. choose the most appropriate geometric object, aesthetic mapping, facetting, postion adjustment; add meaningful axis lables, figure titles legend titile; change the background; be creative; and etc.)
+    
+    
+* Please note that the **excercise 4 is optional**. It is a good excercise for practicing your data tidying and exploration skills through, so we encourage you to give it a try if time allows.
+
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
