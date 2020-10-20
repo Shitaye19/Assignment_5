@@ -106,19 +106,57 @@ kable(Fruit)
 
 
 ```{r}
-read_table("https://raw.githubsercontent.com/nt246/NTRES6940-science/master/datasets/dataset4.txt")
-#hacky hour
+#read_csv("https://raw.githubsercontent.com/nt246/NTRES6940-science/master/datasets/dataset4.txt")#, sep =",")
+#hacky hour not working
 ```
 
-**1.5 import `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset5.txt` into R. Parse the columns properly. Write this imported and parsed data frame into a new csv file named `dataset5_new.csv` in your `problem_sets` folder.
+**1.5 import `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset5.txt` into R. Parse the columns properly. Write this imported and parsed data frame into a new csv file named `dataset5_new.csv` in your `problem_sets` folder.**
 
 ```{r}
 
+Expdate<-read.table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset5.txt")
+colnames(Expdate) <- Expdate[1,]
+Expdate<-Expdate[-1,]
+kable(Expdate)
+write.csv(Expdate, file = "dataset5_new.csv") #imported dataframe
+
+
+```
+
+It is not clear how to organize the dataframe after parsing
+
+```{r}
+#Expdate1<-read.table(parse_character(c("Name", "Expiration Date", "Time")),
+                     #parse_character(c("apple","orange","durian")),
+                     #parse_date("2018-09-26","2018-10-02","2018-10-21"),
+                     #parse_time("01:00:00","13:00:00","11;00:00"))
+
 ```
 
 
+#**Exercise 2.Weather station**
+
+This dataset contains the weather and air quality data collected by a weather station in Taiwan. It was obtained from the Environmental Protection Administration, Excutive Yuan, R.O.C. (Taiwan).
+
+**2.1 The text file `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station_notes.txt` contains desciptions of different variables collected by the station. Import it into R and print it in a table as shown below.**
 
 
-  
-  
+```{r}
+#read.table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station_notes.txt")
+```
+
+
+**2.2 Import `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv` in to R. As you can see, this dataset is a classic example of untidy data: values of a variable (i.e. hour of the day) are stored as column names; variable names are stored in the `item' column. Clean this dataset up by turning it into a tidy format. Also, parse the `date` variable into date format and parse `hour` into time. Turn all invalid values into `NA` and turn`NR` in rainfall into `0`. Parse all values into numbers. Show the first 6 rows and 15 columns of this cleaned dataset, as shown below. (Hint: you don't have to do these tasks in the given order.)**
+
+
+
+
+
+
+
+
+
+
+
+
   

@@ -105,3 +105,90 @@ tibble(a = c(1,2),
 | -: | --: | :------ |
 | 1 | 2.1 | apple   |
 | 2 | 3.2 | orrange |
+
+**1.2 import
+`https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset2.txt`
+into R. Change the column names into “Name”, “Weight”, “Price”.**
+
+``` r
+data_Fruit<-read.table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset2.txt", sep = ",") 
+
+colnames(data_Fruit) <- c("Name", "Weight", "Price")
+kable(data_Fruit)
+```
+
+| Name   | Weight | Price |
+| :----- | -----: | ----: |
+| apple  |      1 |   2.9 |
+| orange |      2 |   4.9 |
+| durian |     10 |  19.9 |
+
+**1.3 Import
+`https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset3.txt`
+into R . Watch out for the first few lines, missing values, separators,
+quotation marks, and deliminaters.**
+
+``` r
+read_table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset3.txt")#, row.names = 1)# sep = ",")
+```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   `Table of fruits` = col_character()
+    ## )
+
+    ## # A tibble: 5 x 1
+    ##   `Table of fruits`       
+    ##   <chr>                   
+    ## 1 09/25/18                
+    ## 2 /Name/;/Weight/;/Price/ 
+    ## 3 /apple/;1;2.9           
+    ## 4 /orange/;2;Not Available
+    ## 5 /durian/;?;19.9
+
+``` r
+Fruit<-read_csv("Name, Weight,Price
+         apple,1,2.9
+         orange, 2, NA
+         durian, NA, 19.9")
+kable(Fruit)
+```
+
+| Name   | Weight | Price |
+| :----- | -----: | ----: |
+| apple  |      1 |   2.9 |
+| orange |      2 |    NA |
+| durian |     NA |  19.9 |
+
+**1.4 Import
+`https://raw.githubsercontent.com/nt246/NTRES6940-science/master/datasets/dataset4.txt`
+into R. Watch out for comments, units, and decimal markes(which are `,`
+in this case).**
+
+``` r
+#read_csv("https://raw.githubsercontent.com/nt246/NTRES6940-science/master/datasets/dataset4.txt")#, sep =",")
+#hacky hour not working
+```
+
+**1.5 import
+`https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset5.txt`
+into R. Parse the columns properly. Write this imported and parsed data
+frame into a new csv file named `dataset5_new.csv` in your
+`problem_sets` folder.**
+
+``` r
+Expdate<-read.table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset5.txt")
+colnames(Expdate) <- Expdate[1,]
+Expdate<-Expdate[-1,]
+kable(Expdate)
+```
+
+|   | Name   | Expiration Date    | Time    |
+| :- | :----- | :----------------- | :------ |
+| 2 | apple  | September 26, 2018 | 1:00am  |
+| 3 | orange | October 2, 2018    | 1:00pm  |
+| 4 | durian | October 21, 2018   | 11:00am |
+
+``` r
+write.csv(Expdate, file = "dataset5_new.csv") #imported dataframe
+```
