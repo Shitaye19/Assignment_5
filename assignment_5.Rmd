@@ -75,9 +75,20 @@ tibble(a = c(1,2),
 ```
   
   
+**1.2 import `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset2.txt` into R. Change the column names into “Name”, “Weight”, “Price”.**
   
+```{r}
+
+data_Fruit<-read.table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset2.txt", sep = ",") 
+
+colnames(data_Fruit) <- c("Name", "Weight", "Price")
+kable(data_Fruit)
+
+```
   
-  
+```{r}
+kable(data_Fruit)
+```
   
   
   
