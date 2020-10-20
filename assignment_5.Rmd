@@ -91,9 +91,28 @@ kable(data_Fruit)
 
 ```{r}
 
-Fruit<-read.delim("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset3.txt")#, row.names = 1)#, sep = ",")
-
+read_table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset3.txt")#, row.names = 1)# sep = ",")
+Fruit<-read_csv("Name, Weight,Price
+         apple,1,2.9
+         orange, 2, NA
+         durian, NA, 19.9")
 kable(Fruit)
+
+```
+
+
+
+**1.4 Import `https://raw.githubsercontent.com/nt246/NTRES6940-science/master/datasets/dataset4.txt` into R. Watch out for comments, units, and decimal markes(which are `,` in this case).**
+
+
+```{r}
+read_table("https://raw.githubsercontent.com/nt246/NTRES6940-science/master/datasets/dataset4.txt")
+#hacky hour
+```
+
+**1.5 import `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/dataset5.txt` into R. Parse the columns properly. Write this imported and parsed data frame into a new csv file named `dataset5_new.csv` in your `problem_sets` folder.
+
+```{r}
 
 ```
 
