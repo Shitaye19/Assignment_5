@@ -192,3 +192,66 @@ kable(Expdate)
 ``` r
 write.csv(Expdate, file = "dataset5_new.csv") #imported dataframe
 ```
+
+It is not clear how to organize the dataframe after parsing
+
+``` r
+#Expdate1<-read.table(parse_character(c("Name", "Expiration Date", "Time")),
+                     #parse_character(c("apple","orange","durian")),
+                     #parse_date("2018-09-26","2018-10-02","2018-10-21"),
+                     #parse_time("01:00:00","13:00:00","11;00:00"))
+```
+
+\#**Exercise 2.Weather station**
+
+This dataset contains the weather and air quality data collected by a
+weather station in Taiwan. It was obtained from the Environmental
+Protection Administration, Excutive Yuan, R.O.C. (Taiwan).
+
+**2.1 The text file
+`https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station_notes.txt`
+contains desciptions of different variables collected by the station.
+Import it into R and print it in a table as shown below.**
+
+``` r
+#read.table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station_notes.txt")
+```
+
+**2.2 Import
+`https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv`
+in to R. As you can see, this dataset is a classic example of untidy
+data: values of a variable (i.e. hour of the day) are stored as column
+names; variable names are stored in the `item' column. Clean this
+dataset up by turning it into a tidy format. Also, parse
+the`date`variable into date format and parse`hour`into time. Turn all
+invalid values into`NA`and turn`NR`in rainfall into`0\`. Parse all
+values into numbers. Show the first 6 rows and 15 columns of this
+cleaned dataset, as shown below. (Hint: you don’t have to do these tasks
+in the given order.)**
+
+``` r
+raifall<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv") 
+```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   .default = col_character(),
+    ##   date = col_date(format = "")
+    ## )
+
+    ## See spec(...) for full column specifications.
+
+``` r
+raifall %>% 
+head() %>% 
+kable()
+```
+
+| date       | station | item      | 00   | 01  | 02   | 03   | 04   | 05   | 06   | 07  | 08   | 09   | 10   | 11   | 12   | 13  | 14  | 15   | 16   | 17   | 18   | 19   | 20   | 21  | 22   | 23   |
+| :--------- | :------ | :-------- | :--- | :-- | :--- | :--- | :--- | :--- | :--- | :-- | :--- | :--- | :--- | :--- | :--- | :-- | :-- | :--- | :--- | :--- | :--- | :--- | :--- | :-- | :--- | :--- |
+| 2015-01-01 | Cailiao | AMB\_TEMP | 16   | 16  | 15   | 15   | 15   | 14   | 14   | 14  | 14   | 15   | 14   | 15   | 15   | 15  | 14  | 13   | 13   | 13   | 12   | 13   | 13   | 13  | 13   | 13   |
+| 2015-01-01 | Cailiao | CO        | 0.74 | 0.7 | 0.66 | 0.61 | 0.51 | 0.51 | 0.51 | 0.6 | 0.62 | 0.58 | 0.53 | 0.49 | 0.45 | 0.4 | 0.4 | 0.41 | 0.44 | 0.45 | 0.41 | 0.42 | 0.31 | 0.3 | 0.32 | 0.33 |
+| 2015-01-01 | Cailiao | NO        | 1    | 0.8 | 1.1  | 1.7  | 2    | 1.7  | 1.9  | 2.4 | 3.4  | 3.7  | 3.5  | 3.4  | 3.3  | 3.1 | 3.2 | 2.5  | 2.9  | 2.2  | 2.3  | 2.3  | 1.8  | 1.9 | 2.1  | 1.8  |
+| 2015-01-01 | Cailiao | NO2       | 15   | 13  | 13   | 12   | 11   | 13   | 13   | 16  | 16   | 14   | 12   | 11   | 11   | 9.8 | 11  | 11   | 14   | 15   | 16   | 18   | 13   | 13  | 14   | 16   |
+| 2015-01-01 | Cailiao | NOx       | 16   | 14  | 14   | 13   | 13   | 15   | 15   | 18  | 19   | 18   | 15   | 15   | 14   | 13  | 14  | 14   | 17   | 17   | 18   | 20   | 15   | 15  | 16   | 17   |
+| 2015-01-01 | Cailiao | O3        | 35   | 36  | 35   | 34   | 34   | 32   | 30   | 26  | 26   | 29   | 33   | 38   | 38   | 40  | 39  | 35   | 31   | 30   | 30   | 27   | 30   | 28  | 27   | 25   |
