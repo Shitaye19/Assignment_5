@@ -174,10 +174,12 @@ After cleaning
 
 ```{r}
 
- cleaned_data<-pivot_longer(rainfall, cols = 4:27, names_to = 'hour', values_to = 'value') %>% 
-  pivot_wider(names_from = item, values_from = value) 
-  head(cleaned_data)[1:6,1:15] %>% 
-   kable()
+cleaned_data<-pivot_longer(rainfall, cols = 4:27, names_to = 'hour', values_to = 'value') %>% 
+pivot_wider(names_from = item, values_from = value) 
+cleaned_data$date <- format(as.Date(cleaned_data$date, format ="%Y/%m/%d"))
+cleaned_data$RAINFALL[cleaned_data$RAINFALL=="NR"]<-0
+head(cleaned_data)[1:6,1:15] %>% 
+kable()
   
 ```
 
