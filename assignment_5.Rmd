@@ -156,10 +156,10 @@ blank indicates no data
 
 ```{r}
 
-#rainfall<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv") 
-#raifall %>% 
-#head()%>% 
-#kable()
+rainfall<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv") 
+
+kable(head(rainfall)[1:6,1:15])
+
 
 
 ```
