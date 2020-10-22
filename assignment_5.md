@@ -240,6 +240,16 @@ kable(weather)
 | WIND\_SPEED | m/sec   | Wind speed (The average of last ten minutes per hour)     |
 | WS\_HR      | m/sec   | Wind speed (The average of hour)                          |
 
+`#` indicates invalid value by equipment inspection
+
+`*` indicates invalid value by program inspection
+
+`x` indicates invalid value by human inspection
+
+`NR` indicates no rainfall
+
+blank indicates no data
+
 **2.2 Import
 `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv`
 in to R. As you can see, this dataset is a classic example of untidy
@@ -253,11 +263,29 @@ cleaned dataset, as shown below. (Hint: you don’t have to do these tasks
 in the given order.)**
 
 ``` r
-#rainfall<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv") 
-#raifall %>% 
-#head()%>% 
-#kable()
+rainfall<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv") 
 ```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   .default = col_character(),
+    ##   date = col_date(format = "")
+    ## )
+
+    ## See spec(...) for full column specifications.
+
+``` r
+kable(head(rainfall)[1:6,1:15])
+```
+
+| date       | station | item      | 00   | 01  | 02   | 03   | 04   | 05   | 06   | 07  | 08   | 09   | 10   | 11   |
+| :--------- | :------ | :-------- | :--- | :-- | :--- | :--- | :--- | :--- | :--- | :-- | :--- | :--- | :--- | :--- |
+| 2015-01-01 | Cailiao | AMB\_TEMP | 16   | 16  | 15   | 15   | 15   | 14   | 14   | 14  | 14   | 15   | 14   | 15   |
+| 2015-01-01 | Cailiao | CO        | 0.74 | 0.7 | 0.66 | 0.61 | 0.51 | 0.51 | 0.51 | 0.6 | 0.62 | 0.58 | 0.53 | 0.49 |
+| 2015-01-01 | Cailiao | NO        | 1    | 0.8 | 1.1  | 1.7  | 2    | 1.7  | 1.9  | 2.4 | 3.4  | 3.7  | 3.5  | 3.4  |
+| 2015-01-01 | Cailiao | NO2       | 15   | 13  | 13   | 12   | 11   | 13   | 13   | 16  | 16   | 14   | 12   | 11   |
+| 2015-01-01 | Cailiao | NOx       | 16   | 14  | 14   | 13   | 13   | 15   | 15   | 18  | 19   | 18   | 15   | 15   |
+| 2015-01-01 | Cailiao | O3        | 35   | 36  | 35   | 34   | 34   | 32   | 30   | 26  | 26   | 29   | 33   | 38   |
 
 **2.3 Using this cleanded dataset, plot the daily variation in ambient
 temperature on september 25, 2015, as shown below.**

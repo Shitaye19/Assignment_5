@@ -145,14 +145,19 @@ kable(weather)
 
 
 `#` indicates invalid value by equipment inspection
+
 `*` indicates invalid value by program inspection
+
 `x` indicates invalid value by human inspection
+
 `NR` indicates no rainfall
+
 blank indicates no data
 
 
 **2.2 Import `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv` in to R. As you can see, this dataset is a classic example of untidy data: values of a variable (i.e. hour of the day) are stored as column names; variable names are stored in the `item' column. Clean this dataset up by turning it into a tidy format. Also, parse the `date` variable into date format and parse `hour` into time. Turn all invalid values into `NA` and turn`NR` in rainfall into `0`. Parse all values into numbers. Show the first 6 rows and 15 columns of this cleaned dataset, as shown below. (Hint: you don't have to do these tasks in the given order.)**
 
+Before cleaning:
 
 ```{r}
 
@@ -163,6 +168,26 @@ kable(head(rainfall)[1:6,1:15])
 
 
 ```
+
+After cleaning
+
+
+```{r}
+
+ cleaned_data<-pivot_longer(rainfall, cols = 4:27, names_to = 'hour', values_to = 'value') %>% 
+  pivot_wider(names_from = item, values_from = value) 
+  head(cleaned_data)[1:6,1:15] %>% 
+   kable()
+  
+```
+
+
+
+
+
+
+
+
 
 
 
