@@ -135,7 +135,8 @@ This dataset contains the weather and air quality data collected by a weather st
 
 ```{r}
 
-weather<-read_table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station_notes.txt")
+weather<-read_delim("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station_notes.txt",
+       delim = "-" )
 
 
 kable(weather)
@@ -143,14 +144,11 @@ kable(weather)
 ```
 
 
-
-
-
-```{r}
-
-```
-
-
+`#` indicates invalid value by equipment inspection
+`*` indicates invalid value by program inspection
+`x` indicates invalid value by human inspection
+`NR` indicates no rainfall
+blank indicates no data
 
 
 **2.2 Import `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv` in to R. As you can see, this dataset is a classic example of untidy data: values of a variable (i.e. hour of the day) are stored as column names; variable names are stored in the `item' column. Clean this dataset up by turning it into a tidy format. Also, parse the `date` variable into date format and parse `hour` into time. Turn all invalid values into `NA` and turn`NR` in rainfall into `0`. Parse all values into numbers. Show the first 6 rows and 15 columns of this cleaned dataset, as shown below. (Hint: you don't have to do these tasks in the given order.)**
@@ -158,19 +156,10 @@ kable(weather)
 
 ```{r}
 
-rainfall<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv") 
-raifall %>% 
-head()%>% 
-kable()
-
-
-```
-
-
-
-```{r}
-rainfall %>% 
-  mutate(hour = colnames()) 
+#rainfall<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv") 
+#raifall %>% 
+#head()%>% 
+#kable()
 
 
 ```

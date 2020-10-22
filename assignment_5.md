@@ -195,13 +195,6 @@ write.csv(Expdate, file = "dataset5_new.csv") #imported dataframe
 
 It is not clear how to organize the dataframe after parsing
 
-``` r
-#Expdate1<-read.table(parse_character(c("Name", "Expiration Date", "Time")),
-                     #parse_character(c("apple","orange","durian")),
-                     #parse_date("2018-09-26","2018-10-02","2018-10-21"),
-                     #parse_time("01:00:00","13:00:00","11;00:00"))
-```
-
 \#**Exercise 2.Weather station**
 
 This dataset contains the weather and air quality data collected by a
@@ -214,8 +207,38 @@ contains desciptions of different variables collected by the station.
 Import it into R and print it in a table as shown below.**
 
 ``` r
-#read.table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station_notes.txt")
+weather<-read_delim("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station_notes.txt",
+       delim = "-" )
 ```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   Item = col_character(),
+    ##   Unit = col_character(),
+    ##   Description = col_character()
+    ## )
+
+``` r
+kable(weather)
+```
+
+| Item        | Unit    | Description                                               |
+| :---------- | :------ | :-------------------------------------------------------- |
+| AMB\_TEMP   | Celsius | Ambient air temperature                                   |
+| CO          | ppm     | Carbon monoxide                                           |
+| NO          | ppb     | Nitric oxide                                              |
+| NO2         | ppb     | Nitrogen dioxide                                          |
+| NOx         | ppb     | Nitrogen oxides                                           |
+| O3          | ppb     | Ozone                                                     |
+| PM10        | μg/m3   | Particulate matter with a diameter between 2.5 and 10 μm  |
+| PM2.5       | μg/m3   | Particulate matter with a diameter of 2.5 μm or less      |
+| RAINFALL    | mm      | Rainfall                                                  |
+| RH          | %       | Relative humidity                                         |
+| SO2         | ppb     | Sulfur dioxide                                            |
+| WD\_HR      | degress | Wind direction (The average of hour)                      |
+| WIND\_DIREC | degress | Wind direction (The average of last ten minutes per hour) |
+| WIND\_SPEED | m/sec   | Wind speed (The average of last ten minutes per hour)     |
+| WS\_HR      | m/sec   | Wind speed (The average of hour)                          |
 
 **2.2 Import
 `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv`
@@ -230,28 +253,198 @@ cleaned dataset, as shown below. (Hint: you don’t have to do these tasks
 in the given order.)**
 
 ``` r
-raifall<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv") 
+#rainfall<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv") 
+#raifall %>% 
+#head()%>% 
+#kable()
+```
+
+**2.3 Using this cleanded dataset, plot the daily variation in ambient
+temperature on september 25, 2015, as shown below.**
+
+**2.4 Plot the daily average ambient temperature throught the year with
+a continuous line, as shown beloe.**
+
+**2.5 Plot the total rainfall per month in a bar chart, as shown
+below.(Hint: separating date into three columns might be helpful.)**
+
+**2.6 Plot the per hour variation in PM2.5 in the first week of
+September with a continuous line, as shown below. (Hint: uniting the
+date and hour and parsing the new variable might be helpful.)**
+
+\#**Excercise 3: Titanic passengers**
+
+**This dataset contains information about a subset of the passengers who
+were abroad the Titanic when it sank in 1912.**
+
+``` r
+titanic<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/Titanic.csv")
 ```
 
     ## Parsed with column specification:
     ## cols(
-    ##   .default = col_character(),
-    ##   date = col_date(format = "")
+    ##   PassengerId = col_double(),
+    ##   Survived = col_double(),
+    ##   Pclass = col_double(),
+    ##   Name = col_character(),
+    ##   Sex = col_character(),
+    ##   Age = col_double(),
+    ##   SibSp = col_double(),
+    ##   Parch = col_double(),
+    ##   Ticket = col_character(),
+    ##   Fare = col_double(),
+    ##   Cabin = col_character(),
+    ##   Embarked = col_character()
     ## )
 
-    ## See spec(...) for full column specifications.
-
 ``` r
-raifall %>% 
-head() %>% 
-kable()
+kable(head(titanic))
 ```
 
-| date       | station | item      | 00   | 01  | 02   | 03   | 04   | 05   | 06   | 07  | 08   | 09   | 10   | 11   | 12   | 13  | 14  | 15   | 16   | 17   | 18   | 19   | 20   | 21  | 22   | 23   |
-| :--------- | :------ | :-------- | :--- | :-- | :--- | :--- | :--- | :--- | :--- | :-- | :--- | :--- | :--- | :--- | :--- | :-- | :-- | :--- | :--- | :--- | :--- | :--- | :--- | :-- | :--- | :--- |
-| 2015-01-01 | Cailiao | AMB\_TEMP | 16   | 16  | 15   | 15   | 15   | 14   | 14   | 14  | 14   | 15   | 14   | 15   | 15   | 15  | 14  | 13   | 13   | 13   | 12   | 13   | 13   | 13  | 13   | 13   |
-| 2015-01-01 | Cailiao | CO        | 0.74 | 0.7 | 0.66 | 0.61 | 0.51 | 0.51 | 0.51 | 0.6 | 0.62 | 0.58 | 0.53 | 0.49 | 0.45 | 0.4 | 0.4 | 0.41 | 0.44 | 0.45 | 0.41 | 0.42 | 0.31 | 0.3 | 0.32 | 0.33 |
-| 2015-01-01 | Cailiao | NO        | 1    | 0.8 | 1.1  | 1.7  | 2    | 1.7  | 1.9  | 2.4 | 3.4  | 3.7  | 3.5  | 3.4  | 3.3  | 3.1 | 3.2 | 2.5  | 2.9  | 2.2  | 2.3  | 2.3  | 1.8  | 1.9 | 2.1  | 1.8  |
-| 2015-01-01 | Cailiao | NO2       | 15   | 13  | 13   | 12   | 11   | 13   | 13   | 16  | 16   | 14   | 12   | 11   | 11   | 9.8 | 11  | 11   | 14   | 15   | 16   | 18   | 13   | 13  | 14   | 16   |
-| 2015-01-01 | Cailiao | NOx       | 16   | 14  | 14   | 13   | 13   | 15   | 15   | 18  | 19   | 18   | 15   | 15   | 14   | 13  | 14  | 14   | 17   | 17   | 18   | 20   | 15   | 15  | 16   | 17   |
-| 2015-01-01 | Cailiao | O3        | 35   | 36  | 35   | 34   | 34   | 32   | 30   | 26  | 26   | 29   | 33   | 38   | 38   | 40  | 39  | 35   | 31   | 30   | 30   | 27   | 30   | 28  | 27   | 25   |
+| PassengerId | Survived | Pclass | Name                                                | Sex    | Age | SibSp | Parch | Ticket           |    Fare | Cabin | Embarked |
+| ----------: | -------: | -----: | :-------------------------------------------------- | :----- | --: | ----: | ----: | :--------------- | ------: | :---- | :------- |
+|           1 |        0 |      3 | Braund, Mr. Owen Harris                             | male   |  22 |     1 |     0 | A/5 21171        |  7.2500 | NA    | S        |
+|           2 |        1 |      1 | Cumings, Mrs. John Bradley (Florence Briggs Thayer) | female |  38 |     1 |     0 | PC 17599         | 71.2833 | C85   | C        |
+|           3 |        1 |      3 | Heikkinen, Miss. Laina                              | female |  26 |     0 |     0 | STON/O2. 3101282 |  7.9250 | NA    | S        |
+|           4 |        1 |      1 | Futrelle, Mrs. Jacques Heath (Lily May Peel)        | female |  35 |     1 |     0 | 113803           | 53.1000 | C123  | S        |
+|           5 |        0 |      3 | Allen, Mr. William Henry                            | male   |  35 |     0 |     0 | 373450           |  8.0500 | NA    | S        |
+|           6 |        0 |      3 | Moran, Mr. James                                    | male   |  NA |     0 |     0 | 330877           |  8.4583 | NA    | Q        |
+
+And here are descriptions of the variables in the dataset
+
+``` r
+notes<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/Notes.csv")
+```
+
+    ## Parsed with column specification:
+    ## cols(
+    ##   Variable = col_character(),
+    ##   Definition = col_character(),
+    ##   Key = col_character()
+    ## )
+
+``` r
+kable(notes)
+```
+
+| Variable    | Definition                                  | Key                                            |
+| :---------- | :------------------------------------------ | :--------------------------------------------- |
+| PassengerId | Passenger ID                                | NA                                             |
+| Survival    | Survival                                    | 0 = No, 1 = Yes                                |
+| Pclass      | Ticket class                                | 1 = 1st, 2 = 2nd, 3 = 3rd                      |
+| Name        | Pasenger name                               | NA                                             |
+| Sex         | Sex                                         | NA                                             |
+| Age         | Age in years                                | NA                                             |
+| Sibsp       | \# of siblings / spouses aboard the Titanic | NA                                             |
+| Parch       | \# of parents / children aboard the Titanic | NA                                             |
+| Ticket      | Ticket number                               | NA                                             |
+| Fare        | Passenger fare                              | NA                                             |
+| Cabin       | Cabin number                                | NA                                             |
+| Embarked    | Port of Embarkation                         | C = Cherbourg, Q = Queenstown, S = Southampton |
+
+\#\#**Part 1.**
+
+**Answer the questions below** and use **figures or tables** to support
+your answer. Choose the most appropriate type of figure or table for
+each question.
+
+**3.1 According to Wikipedia, there was an estimated 2,224 passengers
+and crew onboard the Titanic when it sank. How many of them do we have
+information on in this dataset? How many of them survived and how many
+did not? What is the overall survival rate?**
+
+``` r
+## Write your code here
+```
+
+Write your response here
+
+**3.2 How many passengers on the Titanic were males and how many were
+females? What do you find when you break it down by ticket class?**
+
+``` r
+## Write your code here
+```
+
+Write your response here
+
+**3.3 How many passengers of each sex survived and how many of them did
+not? What is the survival rate for passengers of each sex?**
+
+``` r
+## Write your code here
+```
+
+Write your response here
+
+**3.4 How many passengers do we have age information for (including
+estimated age)? For how many is the age information missing? What is the
+age distribution for passengers whose age information is available?**
+
+``` r
+## Write your code here
+```
+
+Write your response here
+
+**3.5 Show the age distribution per ticket class, per sex. What do you
+find?**
+
+``` r
+## Write your code here
+```
+
+Write your response here
+
+**3.6 What is the age distribution of passengers who survived vs. those
+who did not? What hypothesis can you come up with when comparing these
+two distributions?**
+
+``` r
+## Write your code here
+```
+
+Write your response here
+
+**3.7 In this dataset, the Fare variable does not represent the fare per
+person. Instead, each ticket number has a corresponding fare, and some
+passengers share one single ticket number. Therefore, the Fare variable
+is the total fare for a group of passengers sharing the same ticket
+number. Knowing this, calculate the average fare per person. (You don’t
+need to show a table or a figure for this question, just show the code
+for the calculation)**
+
+``` r
+## Write your code here
+```
+
+Write your response here
+
+**3.8 Show the distribution of the number of family members (including
+siblings, spouses, parents, and children) that each passenger was
+accompanied by. Were most passengers travelling solo or with family?**
+
+``` r
+## Write your code here
+```
+
+Write your response here
+
+**3.9 Which ticket class did most of the largest families get? And which
+ticket class has the lowest proportion of female passengers who
+travelled solo out of all the female passengers in that class?**
+
+``` r
+## Write your code here
+```
+
+Write your response here
+
+**3.10 Do the port of embarkation matter for the survival rates of
+passengers? Why might this be the case?**
+
+``` r
+## Write your code here
+```
+
+Write your response here
