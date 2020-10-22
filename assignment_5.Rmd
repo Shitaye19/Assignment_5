@@ -125,15 +125,6 @@ write.csv(Expdate, file = "dataset5_new.csv") #imported dataframe
 
 It is not clear how to organize the dataframe after parsing
 
-```{r}
-#Expdate1<-read.table(parse_character(c("Name", "Expiration Date", "Time")),
-                     #parse_character(c("apple","orange","durian")),
-                     #parse_date("2018-09-26","2018-10-02","2018-10-21"),
-                     #parse_time("01:00:00","13:00:00","11;00:00"))
-
-```
-
-
 #**Exercise 2.Weather station**
 
 This dataset contains the weather and air quality data collected by a weather station in Taiwan. It was obtained from the Environmental Protection Administration, Excutive Yuan, R.O.C. (Taiwan).
@@ -141,9 +132,25 @@ This dataset contains the weather and air quality data collected by a weather st
 **2.1 The text file `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station_notes.txt` contains desciptions of different variables collected by the station. Import it into R and print it in a table as shown below.**
 
 
+
 ```{r}
-#read.table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station_notes.txt")
+
+weather<-read_table("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station_notes.txt")
+
+
+kable(weather)
+
 ```
+
+
+
+
+
+```{r}
+
+```
+
+
 
 
 **2.2 Import `https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv` in to R. As you can see, this dataset is a classic example of untidy data: values of a variable (i.e. hour of the day) are stored as column names; variable names are stored in the `item' column. Clean this dataset up by turning it into a tidy format. Also, parse the `date` variable into date format and parse `hour` into time. Turn all invalid values into `NA` and turn`NR` in rainfall into `0`. Parse all values into numbers. Show the first 6 rows and 15 columns of this cleaned dataset, as shown below. (Hint: you don't have to do these tasks in the given order.)**
