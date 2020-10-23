@@ -163,7 +163,7 @@ Before cleaning:
 
 rainfall<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv") 
 
-kable(head(rainfall)[1:6,1:15])
+kable((rainfall)[1:6,1:15])
 
 
 
@@ -179,17 +179,32 @@ pivot_wider(names_from = item, values_from = value)
 cleaned_data$date <- format(as.Date(cleaned_data$date, format ="%Y/%m/%d")) 
  cleaned_data$RAINFALL[cleaned_data$RAINFALL == "NR"] <- 0
  cleaned_data$hour=parse_time(cleaned_data$hour, "%H")
-head(cleaned_data)[1:6,1:15] %>% 
-kable()
+kable(cleaned_data[1:6,1:15]) 
+
   
 ```
+
+
+
+```{r}
+weather_new <- pivot_longer(rainfall, cols = 4:27, names_to = "hour", values_to = "value") %>%
+  mutate(value=ifelse(value=="NR", 0, value), value=parse_double(value),
+         hour=parse_time(hour, "%H")) %>%
+  pivot_wider(names_from = item, values_from = value)
+
+```
+
+
+
+
+
 
 
 
 **2.3 Using this cleanded dataset, plot the daily variation in ambient temperature on september 25, 2015, as shown below.**
 
 ```{r}
-sept<-cleaned_data %>% 
+sept<-weather_new %>% 
   filter(date=="2015-09-25")
 ggplot(sept, mapping = aes(x = hour, y = AMB_TEMP))+
   geom_line()
@@ -200,12 +215,12 @@ ggplot(sept, mapping = aes(x = hour, y = AMB_TEMP))+
 
 
 
-**2.4 Plot the daily average ambient temperature throught the year with a continuous line, as shown beloe.**
+**2.4 Plot the daily average ambient temperature throught the year with a continuous line, as shown below.**
 
 
-```{r}
 
-```
+
+
 
 **2.5 Plot the total rainfall per month in a bar chart, as shown below.(Hint: separating date into three columns might be helpful.)**
 
