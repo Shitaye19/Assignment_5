@@ -172,33 +172,16 @@ kable((rainfall)[1:6,1:15])
 After cleaning
 
 
-```{r}
-
-cleaned_data<-pivot_longer(rainfall, cols = 4:27, names_to = 'hour', values_to = "value") %>% 
-pivot_wider(names_from = item, values_from = value) 
-cleaned_data$date <- format(as.Date(cleaned_data$date, format ="%Y/%m/%d")) 
- cleaned_data$RAINFALL[cleaned_data$RAINFALL == "NR"] <- 0
- cleaned_data$hour=parse_time(cleaned_data$hour, "%H")
-kable(cleaned_data[1:6,1:15]) 
-
-  
-```
 
 
 
-```{r}
+```{r, message =FALSE, warning=FALSE}
 weather_new <- pivot_longer(rainfall, cols = 4:27, names_to = "hour", values_to = "value") %>%
   mutate(value=ifelse(value=="NR", 0, value), value=parse_double(value),
          hour=parse_time(hour, "%H")) %>%
   pivot_wider(names_from = item, values_from = value)
 
 ```
-
-
-
-
-
-
 
 
 **2.3 Using this cleanded dataset, plot the daily variation in ambient temperature on september 25, 2015, as shown below.**
@@ -218,6 +201,15 @@ ggplot(sept, mapping = aes(x = hour, y = AMB_TEMP))+
 **2.4 Plot the daily average ambient temperature throught the year with a continuous line, as shown below.**
 
 
+```{r, message=F}
+
+weather_new %>% 
+  group_by(date) %>% 
+  summarise(AMB_TEMP = mean(AMB_TEMP, na.rm = T)) %>% 
+  ggplot(mapping = aes(x=date, y= AMB_TEMP))+
+geom_line()
+  
+```
 
 
 
