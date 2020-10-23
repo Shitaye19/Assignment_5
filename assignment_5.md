@@ -262,6 +262,8 @@ values into numbers. Show the first 6 rows and 15 columns of this
 cleaned dataset, as shown below. (Hint: you don’t have to do these tasks
 in the given order.)**
 
+Before cleaning:
+
 ``` r
 rainfall<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station.csv") 
 ```
@@ -286,6 +288,27 @@ kable(head(rainfall)[1:6,1:15])
 | 2015-01-01 | Cailiao | NO2       | 15   | 13  | 13   | 12   | 11   | 13   | 13   | 16  | 16   | 14   | 12   | 11   |
 | 2015-01-01 | Cailiao | NOx       | 16   | 14  | 14   | 13   | 13   | 15   | 15   | 18  | 19   | 18   | 15   | 15   |
 | 2015-01-01 | Cailiao | O3        | 35   | 36  | 35   | 34   | 34   | 32   | 30   | 26  | 26   | 29   | 33   | 38   |
+
+After cleaning
+
+``` r
+cleaned_data<-pivot_longer(rainfall, cols = 4:27, names_to = 'hour', values_to = "value") %>% 
+pivot_wider(names_from = item, values_from = value) 
+cleaned_data$date <- format(as.Date(cleaned_data$date, format ="%Y/%m/%d")) 
+ cleaned_data$RAINFALL[cleaned_data$RAINFALL == "NR"] <- 0
+ cleaned_data$hour=parse_time(cleaned_data$hour, "%H")
+head(cleaned_data)[1:6,1:15] %>% 
+kable()
+```
+
+| date       | station | hour     | AMB\_TEMP | CO   | NO  | NO2 | NOx | O3 | PM10 | PM2.5 | RAINFALL | RH | SO2 | WD\_HR |
+| :--------- | :------ | :------- | :-------- | :--- | :-- | :-- | :-- | :- | :--- | :---- | :------- | :- | :-- | :----- |
+| 2015-01-01 | Cailiao | 00:00:00 | 16        | 0.74 | 1   | 15  | 16  | 35 | 171  | 76    | 0        | 57 | 9.2 | 74     |
+| 2015-01-01 | Cailiao | 01:00:00 | 16        | 0.7  | 0.8 | 13  | 14  | 36 | 174  | 78    | 0        | 57 | 7.7 | 72     |
+| 2015-01-01 | Cailiao | 02:00:00 | 15        | 0.66 | 1.1 | 13  | 14  | 35 | 160  | 69    | 0        | 58 | 6.6 | 74     |
+| 2015-01-01 | Cailiao | 03:00:00 | 15        | 0.61 | 1.7 | 12  | 13  | 34 | 142  | 60    | 0        | 59 | 5.4 | 71     |
+| 2015-01-01 | Cailiao | 04:00:00 | 15        | 0.51 | 2   | 11  | 13  | 34 | 123  | 52    | 0        | 59 | 4.8 | 67     |
+| 2015-01-01 | Cailiao | 05:00:00 | 14        | 0.51 | 1.7 | 13  | 15  | 32 | 110  | 44    | 0        | 57 | 5   | 63     |
 
 **2.3 Using this cleanded dataset, plot the daily variation in ambient
 temperature on september 25, 2015, as shown below.**

@@ -174,10 +174,11 @@ After cleaning
 
 ```{r}
 
-cleaned_data<-pivot_longer(rainfall, cols = 4:27, names_to = 'hour', values_to = 'value') %>% 
+cleaned_data<-pivot_longer(rainfall, cols = 4:27, names_to = 'hour', values_to = "value") %>% 
 pivot_wider(names_from = item, values_from = value) 
-cleaned_data$date <- format(as.Date(cleaned_data$date, format ="%Y/%m/%d"))
-cleaned_data$RAINFALL[cleaned_data$RAINFALL=="NR"]<-0
+cleaned_data$date <- format(as.Date(cleaned_data$date, format ="%Y/%m/%d")) 
+ cleaned_data$RAINFALL[cleaned_data$RAINFALL == "NR"] <- 0
+ cleaned_data$hour=parse_time(cleaned_data$hour, "%H")
 head(cleaned_data)[1:6,1:15] %>% 
 kable()
   
@@ -185,17 +186,15 @@ kable()
 
 
 
-
-
-
-
-
-
-
-
 **2.3 Using this cleanded dataset, plot the daily variation in ambient temperature on september 25, 2015, as shown below.**
 
 ```{r}
+sept<-cleaned_data %>% 
+  filter(date=="2015-09-25")
+ggplot(sept, mapping = aes(x = hour, y = AMB_TEMP))+
+  geom_line()
+
+
 
 ```
 
