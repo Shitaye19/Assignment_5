@@ -216,8 +216,22 @@ geom_line()
 
 **2.5 Plot the total rainfall per month in a bar chart, as shown below.(Hint: separating date into three columns might be helpful.)**
 
+# I may need to split the date to year month and date then summarize by month
+```{r, message=FALSE}
 
-```{r}
+library(lubridate)
+```
+
+
+
+```{r,message=F}
+
+weather_new %>% 
+  mutate_at(vars(date),funs(year,month, day))%>% 
+  group_by(month)%>% 
+  summarize(MonthlyRainfall= sum(RAINFALL,na.rm = T))%>% 
+  ggplot(mapping = aes(x=month, y = MonthlyRainfall))+
+  geom_bar(stat = "identity")
 
 ```
 
