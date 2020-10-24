@@ -273,8 +273,11 @@ kable(notes)
 
 ```{r}
 
-dim(titanic) #or
-length(titanic$PassengerId)
+titanic %>% 
+  summarize(total_individuals=sum(Survived==1|Survived==0),
+            total_survived =sum(Survived==1),total_notsurvived=sum(Survived ==0), 
+            survival_rate= total_survived/total_individuals) %>% 
+kable()
 
 ```
 
