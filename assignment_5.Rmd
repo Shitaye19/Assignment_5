@@ -322,12 +322,12 @@ titanic %>%
 ```
 
 
-Write your response here
+Out of the total number of individuals with known information, 109 male survived and 468 did not and 233 female survived and 81 did not. The survival rate was 18.9% for male and 74.2% for female.
 
 **3.4 How many passengers do we have age information for (including estimated age)? For how many is the age information missing? What is the age distribution for passengers whose age information is available?**
 
 ```{r}
-## Write your code here
+
 ```
 
 
