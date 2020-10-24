@@ -343,15 +343,25 @@ We have age information for 714 individuals and the age information is missing f
 The distribution of the age group looks skwed to the younger age group(below 40)
 
 
-
-
 **3.5 Show the age distribution per ticket class, per sex. What do you find?**
 
-```{r}
-## Write your code here
+```{r, message=F, warning = F}
+titanic %>% 
+  group_by(Pclass) %>% 
+  ggplot(mapping = aes(x = Age, na.rm = T))+
+geom_histogram()+
+  facet_wrap(~Pclass)
+
+  titanic %>% 
+  group_by(Sex) %>% 
+  ggplot(mapping = aes(x = Age, na.rm = T))+
+geom_histogram()+
+  facet_wrap(~Sex)
+
+
 ```
 
-Write your response here
+The passengers in class 3 were more than 1 and 2. Among the two sexs the male passengers are higher in number than female. The male passenger's distribution was skewed towards the younger group while tha tof the femal looks normal.
 
 **3.6 What is the age distribution of passengers who survived vs. those who did not? What hypothesis can you come up with when comparing these two distributions?**
 

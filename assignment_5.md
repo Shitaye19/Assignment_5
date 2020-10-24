@@ -498,26 +498,64 @@ not? What is the survival rate for passengers of each sex?**
 | ---------------: | ------------------: | ------------------: |
 |              233 |                  81 |           0.7420382 |
 
-Write your response here
+Out of the total number of individuals with known information, 109 male
+survived and 468 did not and 233 female survived and 81 did not. The
+survival rate was 18.9% for male and 74.2% for female.
 
 **3.4 How many passengers do we have age information for (including
 estimated age)? For how many is the age information missing? What is the
 age distribution for passengers whose age information is available?**
 
 ``` r
-## Write your code here
+titanic %>% 
+count(!is.na(Age)) %>% 
+kable()
 ```
 
-Write your response here
+| \!is.na(Age) |   n |
+| :----------- | --: |
+| FALSE        | 177 |
+| TRUE         | 714 |
+
+``` r
+titanic %>% 
+  ggplot(mapping= aes(x=Age, na.rm = T))+
+  geom_histogram()
+```
+
+![](assignment_5_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+
+We have age information for 714 individuals and the age information is
+missing for 177 individuals. The distribution of the age group looks
+skwed to the younger age group(below 40)
 
 **3.5 Show the age distribution per ticket class, per sex. What do you
 find?**
 
 ``` r
-## Write your code here
+titanic %>% 
+  group_by(Pclass) %>% 
+  ggplot(mapping = aes(x = Age, na.rm = T))+
+geom_histogram()+
+  facet_wrap(~Pclass)
 ```
 
-Write your response here
+![](assignment_5_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+
+``` r
+  titanic %>% 
+  group_by(Sex) %>% 
+  ggplot(mapping = aes(x = Age, na.rm = T))+
+geom_histogram()+
+  facet_wrap(~Sex)
+```
+
+![](assignment_5_files/figure-gfm/unnamed-chunk-22-2.png)<!-- -->
+
+The passengers in class 3 were more than 1 and 2. Among the two sexs the
+male passengers are higher in number than female. The male passenger’s
+distribution was skewed towards the younger group while tha tof the
+femal looks normal.
 
 **3.6 What is the age distribution of passengers who survived vs. those
 who did not? What hypothesis can you come up with when comparing these
