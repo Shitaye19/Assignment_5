@@ -562,10 +562,24 @@ who did not? What hypothesis can you come up with when comparing these
 two distributions?**
 
 ``` r
-## Write your code here
+survivedP<-titanic %>% 
+  filter(Survived==1) %>% 
+  ggplot(mapping = aes(x = Age, na.rm = T))+
+  geom_histogram()+
+  labs(title = "Age ditribution of survived passengers")
+
+unsurvivedp<-titanic %>% 
+  filter(Survived==0) %>% 
+  ggplot(mapping = aes(x = Age, na.rm = T))+
+  geom_histogram()+
+  labs(title = "Age ditribution of unsurvived passengers")
+library(gridExtra)
+grid.arrange(survivedP, unsurvivedp, nrow=1)
 ```
 
-Write your response here
+![](assignment_5_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
+
+The survival rate may not depend on the age group.
 
 **3.7 In this dataset, the Fare variable does not represent the fare per
 person. Instead, each ticket number has a corresponding fare, and some
