@@ -326,12 +326,24 @@ Out of the total number of individuals with known information, 109 male survived
 
 **3.4 How many passengers do we have age information for (including estimated age)? For how many is the age information missing? What is the age distribution for passengers whose age information is available?**
 
-```{r}
+```{r, message=F, warning=F}
+
+titanic %>% 
+count(!is.na(Age)) %>% 
+kable()
+
+titanic %>% 
+  ggplot(mapping= aes(x=Age, na.rm = T))+
+  geom_histogram()
+
 
 ```
 
+We have age information for 714 individuals and the age information is missing for 177 individuals.
+The distribution of the age group looks skwed to the younger age group(below 40)
 
-Write your response here
+
+
 
 **3.5 Show the age distribution per ticket class, per sex. What do you find?**
 
