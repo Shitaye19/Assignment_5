@@ -3,29 +3,30 @@ Assignment 5: Data import (readr) and tidy data (tidyr)
 
 \#**Instructions: Please read through this before you begin**
 
-\*This homework is due by **10pm on Monday 10/26/20**
+  - This homework is due by **10pm on Monday 10/26/20**
 
-\*Please **reproduce this markdown template**. Pay attention to all the
-formating in this file, including bullet points, bolded characterrs,
-inserted code chunks, headings, text colors, blank lines, etc.
+  - Please **reproduce this markdown template**. Pay attention to all
+    the formating in this file, including bullet points, bolded
+    characterrs, inserted code chunks, headings, text colors, blank
+    lines, etc.
 
-\*For the first two excercises in this assignment, **import** data files
-into R and **parse** them properly as instructed. **Tidy and/or
-**transform\*\* the data frames when appropriate.
-
-  - We have not extensively covered parsing data in lecture, but you can
-    find more information about here.
-
-  - Briefly, you can choose to use the `col_types` argument in
-    a`read_*()` function to parse the data during import.
-
-  - In many cases, you can also choose to parse the data using one of
-    the `parse_*()` functions nested within a `mutate()` after importing
-    the data.
-
-  - In many cases, you can choose to parse the data using one of the
-    `parse_*()` functions nested within a `mutate()` function after
-    importing the data.
+  - For the first two excercises in this assignment, **import** data
+    files into R and **parse** them properly as instructed. **Tidy
+    and/or **transform\*\* the data frames when appropriate.
+    
+      - We have not extensively covered parsing data in lecture, but you
+        can find more information about here.
+    
+      - Briefly, you can choose to use the `col_types` argument in
+        a`read_*()` function to parse the data during import.
+    
+      - In many cases, you can also choose to parse the data using one
+        of the `parse_*()` functions nested within a `mutate()` after
+        importing the data.
+    
+      - In many cases, you can choose to parse the data using one of the
+        `parse_*()` functions nested within a `mutate()` function after
+        importing the data.
 
   - For the next exercise, you will explore a dataset with details about
     passengers on the Titanic. First, **answer the questions below and
@@ -52,8 +53,7 @@ into R and **parse** them properly as instructed. **Tidy and/or
 
   - Have all your code embedded within the R markdown file, and show
     both of your **code** and **plots** in the kitted markdown file.
-
-  - Use R Markdown functionalities to **hide message and warnings when
+    \*Use R Markdown functionalities to **hide message and warnings when
     needed**. (Suggestion: messages and warnings can often be
     informative and important, so please examine them carefylly and only
     turn them off when you finish the exercise).
@@ -432,60 +432,71 @@ information on in this dataset? How many of them survived and how many
 did not? What is the overall survival rate?**
 
 ``` r
-dim(titanic)
+titanic %>% 
+  summarize(total_individuals=sum(Survived==1|Survived==0),
+            total_survived =sum(Survived==1),total_notsurvived=sum(Survived ==0), 
+            survival_rate= total_survived/total_individuals) %>% 
+kable()
 ```
 
-    ## [1] 891  12
+| total\_individuals | total\_survived | total\_notsurvived | survival\_rate |
+| -----------------: | --------------: | -----------------: | -------------: |
+|                891 |             342 |                549 |      0.3838384 |
 
-``` r
-#library(skimr)
-#skim(titanic)
-```
-
-We have the information of 891 passengers.
-
-``` r
-No_Survived<- titanic %>% 
-  
-  summarise(total_Survived= sum(Survived))
-```
-
-``` r
-total_individuals<-titanic %>% 
- summarise(Total=sum(Survived==1|Survived==0) ) 
-total_individuals
-```
-
-    ## # A tibble: 1 x 1
-    ##   Total
-    ##   <int>
-    ## 1   891
-
-``` r
-survival_rate <- (No_Survived/total_individuals)
-survival_rate
-```
-
-    ##   total_Survived
-    ## 1      0.3838384
-
-The rate of survival is 0.39
+We have the information of 891 passengers. 342 individuals survived and
+549 notsurvived and the survivale rate was 0.39.
 
 **3.2 How many passengers on the Titanic were males and how many were
 females? What do you find when you break it down by ticket class?**
 
 ``` r
-## Write your code here
+titanic %>% 
+  summarize(total_male=sum(Sex=="male"), total_female =sum(Sex=="female")) %>% 
+  kable()
 ```
 
-Write your response here
+| total\_male | total\_female |
+| ----------: | ------------: |
+|         577 |           314 |
+
+``` r
+titanic %>% 
+  summarize(ticketclass1=sum(Pclass==1),
+            ticketclass2=sum(Pclass==2),ticketclass3=sum(Pclass==3)) %>% 
+  kable()
+```
+
+| ticketclass1 | ticketclass2 | ticketclass3 |
+| -----------: | -----------: | -----------: |
+|          216 |          184 |          491 |
+
+314 were female and 577 were male
 
 **3.3 How many passengers of each sex survived and how many of them did
 not? What is the survival rate for passengers of each sex?**
 
 ``` r
-## Write your code here
+ titanic %>% 
+  filter(Sex=="male") %>% 
+  summarise(Male_survived = sum(Survived==1), Male_notsurvived= sum(Survived==0),survival_rateMale = Male_survived/sum(Male_survived, Male_notsurvived)) %>% 
+  kable()
 ```
+
+| Male\_survived | Male\_notsurvived | survival\_rateMale |
+| -------------: | ----------------: | -----------------: |
+|            109 |               468 |          0.1889081 |
+
+``` r
+ titanic %>% 
+  filter(Sex=="female") %>% 
+  summarise(Female_survived = sum(Survived==1), Female_notsurvived=sum(Survived==0), 
+            survival_ratFemale= Female_survived/sum(Female_survived,Female_notsurvived)) %>% 
+    kable()
+```
+
+| Female\_survived | Female\_notsurvived | survival\_ratFemale |
+| ---------------: | ------------------: | ------------------: |
+|              233 |                  81 |           0.7420382 |
 
 Write your response here
 

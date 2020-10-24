@@ -11,11 +11,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 #**Instructions: Please read through this before you begin**
 
-*This homework is due by **10pm on Monday 10/26/20**
+* This homework is due by **10pm on Monday 10/26/20**
 
-*Please **reproduce this markdown template**. Pay attention to all the formating in this file, including bullet points, bolded characterrs, inserted code chunks, headings, text colors, blank lines, etc.
+* Please **reproduce this markdown template**. Pay attention to all the formating in this file, including bullet points, bolded characterrs, inserted code chunks, headings, text colors, blank lines, etc.
 
-*For the first two excercises in this assignment, **import** data files into R and **parse** them properly as instructed. **Tidy and/or **transform** the data frames when appropriate.
+* For the first two excercises in this assignment, **import** data files into R and **parse** them properly as instructed. **Tidy and/or **transform** the data frames when appropriate.
 
   + We have not extensively covered parsing data in lecture, but you can find more information about here.
   
@@ -36,7 +36,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * When a verbal response is needed, answer by editing the part in the R markdown template where it says "Write your response here" .
 
 * Have all your code embedded within the R markdown file, and show both of your **code** and **plots** in the    kitted markdown file.
-* Use R Markdown functionalities to **hide message and warnings when needed**. (Suggestion: messages and     warnings can often be informative and important, so please examine them carefylly and only turn them off when you finish the exercise).
+*Use R Markdown functionalities to **hide message and warnings when needed**. (Suggestion: messages and     warnings can often be informative and important, so please examine them carefylly and only turn them off when you finish the exercise).
 
 * Please name your R markdown file `assignment_5.Rmd` and the knitted markdwon file `assignment_5.md`. Please upload both files using your personal GitHub repository for this class.
 
@@ -137,7 +137,6 @@ This dataset contains the weather and air quality data collected by a weather st
 
 weather<-read_delim("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/2015y_Weather_Station_notes.txt",
        delim = "-" )
-
 
 kable(weather)
 
@@ -282,38 +281,20 @@ kable()
 ```
 
 
-We have the information of 891 passengers. 
-
-
-```{r}
-
-No_Survived<- titanic %>% 
-  summarise(No_Survived= sum(Survived))
-No_Survived
-```
-
-
-```{r}
-
-total_individuals<-titanic %>% 
- summarise(Total=sum(Survived==1|Survived==0) ) 
-total_individuals
-
-survival_rate <- (No_Survived/total_individuals)
-survival_rate
-
-```
-The rate of survival is 0.39
+We have the information of 891 passengers. 342 individuals survived and 549 notsurvived and the survivale rate was 0.39.
 
 
 **3.2 How many passengers on the Titanic were males and how many were females? What do you find when you break it down by ticket class?**
 
 ```{r}
 
-#table(titanic$Sex)
-
 titanic %>% 
   summarize(total_male=sum(Sex=="male"), total_female =sum(Sex=="female")) %>% 
+  kable()
+
+titanic %>% 
+  summarize(ticketclass1=sum(Pclass==1),
+            ticketclass2=sum(Pclass==2),ticketclass3=sum(Pclass==3)) %>% 
   kable()
 
 
@@ -324,7 +305,20 @@ titanic %>%
 **3.3 How many passengers of each sex survived and how many of them did not? What is the survival rate for passengers of each sex?**
 
 ```{r}
-## Write your code here
+
+ titanic %>% 
+  filter(Sex=="male") %>% 
+  summarise(Male_survived = sum(Survived==1), Male_notsurvived= sum(Survived==0),survival_rateMale = Male_survived/sum(Male_survived, Male_notsurvived)) %>% 
+  kable()
+ titanic %>% 
+  filter(Sex=="female") %>% 
+  summarise(Female_survived = sum(Survived==1), Female_notsurvived=sum(Survived==0), 
+            survival_ratFemale= Female_survived/sum(Female_survived,Female_notsurvived)) %>% 
+    kable()
+
+
+
+
 ```
 
 
