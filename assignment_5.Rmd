@@ -272,9 +272,10 @@ kable(notes)
 **3.1 According to Wikipedia, there was an estimated 2,224 passengers and crew onboard the Titanic when it sank. How many of them do we have information on in this dataset? How many of them survived and how many did not? What is the overall survival rate?**
 
 ```{r}
-dim(titanic)
-library(skimr)
-skim(titanic)
+
+dim(titanic) #or
+length(titanic$PassengerId)
+
 ```
 
 
@@ -284,9 +285,8 @@ We have the information of 891 passengers.
 ```{r}
 
 No_Survived<- titanic %>% 
-  
-  summarise(total_Survived= sum(Survived))
-
+  summarise(No_Survived= sum(Survived))
+No_Survived
 ```
 
 
@@ -306,10 +306,17 @@ The rate of survival is 0.39
 **3.2 How many passengers on the Titanic were males and how many were females? What do you find when you break it down by ticket class?**
 
 ```{r}
-## Write your code here
+
+#table(titanic$Sex)
+
+titanic %>% 
+  summarize(total_male=sum(Sex=="male"), total_female =sum(Sex=="female")) %>% 
+  kable()
+
+
 ```
 
-Write your response here
+314 were female and 577 were male
 
 **3.3 How many passengers of each sex survived and how many of them did not? What is the survival rate for passengers of each sex?**
 

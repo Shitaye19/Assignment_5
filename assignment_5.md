@@ -369,6 +369,16 @@ weather_new %>%
 September with a continuous line, as shown below. (Hint: uniting the
 date and hour and parsing the new variable might be helpful.)**
 
+``` r
+year_month_day<-weather_new %>% 
+  mutate_at(vars(date),funs(year,month, day))
+
+
+wk1sept<- year_month_day %>% 
+  filter(month==9 & day ==1:8) 
+  #mutate(time=str_c(month,day),time = md(time) ) # "%b/%d"))
+```
+
 \#**Excercise 3: Titanic passengers**
 
 **This dataset contains information about a subset of the passengers who
@@ -376,25 +386,6 @@ were abroad the Titanic when it sank in 1912.**
 
 ``` r
 titanic<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/Titanic.csv")
-```
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   PassengerId = col_double(),
-    ##   Survived = col_double(),
-    ##   Pclass = col_double(),
-    ##   Name = col_character(),
-    ##   Sex = col_character(),
-    ##   Age = col_double(),
-    ##   SibSp = col_double(),
-    ##   Parch = col_double(),
-    ##   Ticket = col_character(),
-    ##   Fare = col_double(),
-    ##   Cabin = col_character(),
-    ##   Embarked = col_character()
-    ## )
-
-``` r
 kable(head(titanic))
 ```
 
@@ -411,16 +402,6 @@ And here are descriptions of the variables in the dataset
 
 ``` r
 notes<-read_csv("https://raw.githubusercontent.com/nt246/NTRES6940-data-science/master/datasets/Notes.csv")
-```
-
-    ## Parsed with column specification:
-    ## cols(
-    ##   Variable = col_character(),
-    ##   Definition = col_character(),
-    ##   Key = col_character()
-    ## )
-
-``` r
 kable(notes)
 ```
 
@@ -451,10 +432,44 @@ information on in this dataset? How many of them survived and how many
 did not? What is the overall survival rate?**
 
 ``` r
-## Write your code here
+dim(titanic)
 ```
 
-Write your response here
+    ## [1] 891  12
+
+``` r
+#library(skimr)
+#skim(titanic)
+```
+
+We have the information of 891 passengers.
+
+``` r
+No_Survived<- titanic %>% 
+  
+  summarise(total_Survived= sum(Survived))
+```
+
+``` r
+total_individuals<-titanic %>% 
+ summarise(Total=sum(Survived==1|Survived==0) ) 
+total_individuals
+```
+
+    ## # A tibble: 1 x 1
+    ##   Total
+    ##   <int>
+    ## 1   891
+
+``` r
+survival_rate <- (No_Survived/total_individuals)
+survival_rate
+```
+
+    ##   total_Survived
+    ## 1      0.3838384
+
+The rate of survival is 0.39
 
 **3.2 How many passengers on the Titanic were males and how many were
 females? What do you find when you break it down by ticket class?**
