@@ -404,11 +404,11 @@ The average Fare per person was $32.2.
 
 ```{r}
 
-titanic %>% 
-  mutate(No_family = sum(SibSp,Parch), na.rm = T) %>% 
-  ggplot(mapping=aes(x=No_family))+
-  geom_histogram()+
-  labs(title = "Ditribution of family numbers abord")
+#titanic %>% 
+  #mutate(No_family = sum(SibSp,Parch)) %>% 
+  #ggplot(mapping=aes(x=No_family))+
+  #geom_histogram()+
+ # labs(title = "Ditribution of family numbers abord")
 
 
 ```
@@ -426,7 +426,10 @@ Write your response here
 **3.10 Do the port of embarkation matter for the survival rates of passengers? Why might this be the case?**
 
 ```{r}
-## Write your code here
+titanic %>% 
+  group_by(Pclass)
+
+
 ```
 
 Write your response here
